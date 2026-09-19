@@ -1,31 +1,66 @@
 # 🏏 Cricket Academy Management System
 
-The **Cricket Academy Management System** is a Java-based application designed to manage cricket academy activities, including coaches, players, training details, and academy-related records.
+The **Cricket Academy Management System** is a Java-based web application designed to manage cricket academy activities, including coaches, players, batches, training details, performance evaluations, documents, and academy-related records.
 
 ## 📌 Project Overview
 
-This system helps cricket academies organize and manage their daily operations digitally. It reduces manual work and makes it easier to maintain academy information in a structured way.
+This system helps cricket academies organize and manage their daily operations digitally. It reduces manual work and makes it easier to maintain player, coach, batch, and performance information in a structured way.
 
 ## ✨ Features
 
-* Coach management
-* Player management
-* Academy record management
-* Add, update, view, and delete records
-* File upload management
-* Data access using DAO classes
-* Organized project structure
-* Database connectivity
-* Easy-to-maintain Java code
+### 👨‍💼 Admin
+- Admin login and authentication
+- Coach management
+- Player management
+- Member directory
+- Search and filter players
+- Create and manage batches
+- Assign players to batches
+- Maximum 15 members per batch
+- Prevent duplicate player assignments
+- View academy records
+
+### 🧑‍🏫 Coach
+- Coach login
+- View assigned players
+- View player details
+- Evaluate player performance
+- Record runs scored
+- Record balls faced
+- Record wickets taken
+- Record overs bowled
+- Record runs conceded
+- Give fitness ratings
+- Add coach feedback
+
+### 🏏 Player
+- Player login
+- View player profile
+- View assigned batch
+- View coach details
+- View batch timing
+- View skill level
+- View monthly fee
+- View batch member count
+- Upload documents
+- Download uploaded documents
+- View performance and match evaluations
+- View coach feedback
 
 ## 🛠️ Technologies Used
 
-* **Java**
-* **JDBC**
-* **SQL Database**
-* **Maven**
-* **Eclipse IDE**
-* **Git and GitHub**
+- **Java**
+- **JSP**
+- **Servlets**
+- **JDBC**
+- **MySQL**
+- **HTML**
+- **CSS**
+- **Bootstrap**
+- **Apache Tomcat**
+- **Maven**
+- **Eclipse IDE**
+- **Git and GitHub**
 
 ## 📂 Project Structure
 
@@ -38,92 +73,207 @@ cricket-academy-management
 │           └── com
 │               └── academy
 │                   ├── dao
-│                   │   ├── CoachDAO.java
+│                   │   ├── BatchDAO.java
+│                   │   ├── EnrollmentDAO.java
+│                   │   ├── PerformanceDAO.java
 │                   │   ├── UploadedFileDAO.java
+│                   │   ├── UserDAO.java
 │                   │   └── ...
 │                   │
 │                   ├── model
-│                   ├── service
-│                   ├── controller
-│                   └── ...
+│                   │   ├── Batch.java
+│                   │   ├── Performance.java
+│                   │   ├── UploadedFile.java
+│                   │   ├── User.java
+│                   │   └── ...
+│                   │
+│                   ├── servlet
+│                   │   ├── AssignPlayerServlet.java
+│                   │   ├── BatchServlet.java
+│                   │   └── ...
+│                   │
+│                   └── util
+│                       └── DBConnection.java
+│
+├── WebContent
+│   ├── admin-dashboard.jsp
+│   ├── coach-dashboard.jsp
+│   ├── player-dashboard.jsp
+│   ├── login.jsp
+│   └── ...
+│
+├── database
+│   └── cricket_academy_db.sql
 │
 ├── pom.xml
 └── README.md
-```
-
 ## ⚙️ Requirements
 
 Before running the project, install the following:
 
-* Java JDK 21 or later
-* Eclipse IDE
-* Maven
-* SQL Database
-* Database driver/JDBC connector
+- Java JDK 21 or later
+- Eclipse IDE
+- Apache Tomcat
+- Maven
+- MySQL
+- MySQL JDBC Driver / Connector
 
 ## 🚀 How to Run the Project
 
-1. Clone the repository:
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/cricket-academy-management.git
-```
 
-2. Open Eclipse IDE.
+## 2. Open the Project
 
-3. Select:
+Open **Eclipse IDE**.
 
-```text
+Select:
+
 File → Import → Existing Maven Projects
-```
 
-4. Select the project folder.
+Select the cloned project folder.
 
-5. Configure the database connection in the project configuration file.
+## 3. Configure the Database
 
-6. Update the database username, password, and URL.
+Open MySQL and run:
 
-7. Right-click the project and select:
+database/cricket_academy_db.sql
 
-```text
-Run As → Java Application
-```
+Database name:
 
-## 🗄️ Database Configuration
+cricket_academy_db
 
-Update the database configuration according to your local database setup.
+## 4. Configure Database Connection
 
-Example:
+Open:
+
+DBConnection.java
+
+Update your MySQL credentials:
 
 ```java
-String url = "jdbc:mysql://localhost:3306/cricket_academy";
+String url = "jdbc:mysql://localhost:3306/cricket_academy_db";
 String username = "root";
 String password = "your_password";
-```
 
-> Replace the database URL, username, password, and database name with your actual configuration.
+5. Run the Application
 
-## 🔐 Security Note
+Configure Apache Tomcat in Eclipse.
 
-Do not upload real database passwords, API keys, or other confidential information to GitHub. Use environment variables or a separate configuration file for sensitive details.
+Then:
 
-## 🔮 Future Enhancements
+Right Click Project → Run As → Run on Server
 
-* Admin login and authentication
-* Player attendance tracking
-* Coach scheduling
-* Fee payment management
-* Training performance reports
-* Dashboard with academy statistics
-* Email notifications
-* Role-based access control
+Select Apache Tomcat and start the application.
 
-## 👨‍💻 Developer
+🗄️ Database
 
-**PRAVEEN** JAVA FULLSTACK DEVELOPER
+The project uses the following main tables:
+
+users
+batches
+enrollments
+performance_records
+uploaded_files
+Batch Capacity
+
+Each batch supports a maximum of:
+
+15 Players
+
+The system prevents additional players from being assigned after the batch reaches its maximum capacity.
+
+🔐 Demo Login Credentials
+Admin
+Email: Rcb@academy.com
+Password: rcb2526
+Coach
+Email: bhuvi@academy.com
+Password: coach123
+Player
+Email: rohit@academy.com
+Password: player123
+
+These are demo credentials created for project testing and demonstration purposes.
+
+🔄 System Workflow
+ADMIN
+  │
+  ├── Manage Coaches
+  ├── Manage Players
+  ├── Create Batches
+  └── Assign Players
+          │
+          ▼
+       COACH
+          │
+          ├── View Assigned Players
+          └── Evaluate Performance
+                    │
+                    ▼
+                 PLAYER
+                    │
+                    ├── View Batch
+                    ├── Upload Documents
+                    └── View Performance
+📊 Performance Evaluation
+
+Coaches can record:
+
+Runs Scored
+Balls Faced
+Wickets Taken
+Overs Bowled
+Runs Conceded
+Fitness Rating
+Coach Feedback
+
+Players can view their performance records from their dashboard.
+
+📄 Document Management
+
+Players can upload:
+
+PDF
+JPG
+JPEG
+PNG
+
+Maximum file size:
+
+10 MB
+
+Players can also download their uploaded documents from the dashboard.
+
+🔒 Role-Based Access
+ADMIN
+→ Academy Management
+
+COACH
+→ Assigned Players & Performance Evaluation
+
+PLAYER
+→ Personal Batch, Documents & Performance
+🔮 Future Enhancements
+Player attendance tracking
+Coach scheduling
+Fee payment management
+Training performance reports
+Dashboard with academy statistics
+Email notifications
+Online fee payment
+Advanced player performance analytics
+Match scheduling
+👨‍💻 Developer
+
+PRAVEEN
+
+Java Full Stack Developer
 
 Computer Science and Engineering Graduate
 
-## 📄 License
+📄 License
 
 This project is created for educational and learning purposes.
